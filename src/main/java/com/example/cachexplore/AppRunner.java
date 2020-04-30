@@ -25,7 +25,7 @@ public class AppRunner implements CommandLineRunner {
         bookRepository.findByIsbn("isbn-1234");
         bookRepository.findByIsbn("isbn-1234");
         int size = CacheManager.ALL_CACHE_MANAGERS.get(0).getCache("com.example.cachexplore.Book").getSize();
-        logger.info("Size: " + size);
+        logger.info("Book entity cache Size: " + size);
     }
 
 }
