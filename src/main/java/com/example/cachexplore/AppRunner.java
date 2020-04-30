@@ -22,6 +22,7 @@ public class AppRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Book book = new Book("isbn-1234", "some book");
         bookRepository.save(book);
+        bookRepository.findById(1L);
         bookRepository.findByIsbn("isbn-1234");
         bookRepository.findByIsbn("isbn-1234");
         int size = CacheManager.ALL_CACHE_MANAGERS.get(0).getCache("com.example.cachexplore.Book").getSize();
