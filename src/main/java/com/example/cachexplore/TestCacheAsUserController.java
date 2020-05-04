@@ -24,7 +24,6 @@ public class TestCacheAsUserController {
 
     @GetMapping("/book/{id}")
     public void getById(@PathVariable long id) {
-        //bookRepository.findById(id);
-        bookRepository.findOne(id);
+        bookRepository.findById(id);
     }
 }

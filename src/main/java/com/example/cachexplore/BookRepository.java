@@ -12,9 +12,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @QueryHints(value = { @QueryHint(name = "org.hibernate.cacheable", value = "true")})
     Book findByIsbn(String isbn);
 
-    //@Override
+    @Override
     @QueryHints(value = { @QueryHint(name = "org.hibernate.cacheable", value = "true")})
-    List<Book> findAllById(List<Long> ids);
+    List<Book> findAllById(Iterable<Long> ids);
 }
-
-//Potato

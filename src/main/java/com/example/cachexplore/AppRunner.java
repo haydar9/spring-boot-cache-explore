@@ -36,10 +36,10 @@ public class AppRunner implements CommandLineRunner {
         }
         //bookRepository.saveAll(books);
         
-        // logger.info("find ID 10 (try 1)");
-        // bookRepository.findById(10l);
-        // logger.info("find ID 10 (try 2)");
-        // bookRepository.findById(10l);
+        logger.info("find ID 10 (try 1)");
+        bookRepository.findById(10l);
+        logger.info("find ID 10 (try 2)");
+        bookRepository.findById(10l);
         
 
         logger.info("find 1,2,3,4,5 (try 1)");
