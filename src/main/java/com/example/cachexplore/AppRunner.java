@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,7 @@ public class AppRunner implements CommandLineRunner {
     private final BookRepository bookRepository;
 
     @Autowired
-    private EntityManager EntityManager;
+    private EntityManager entityManager;
 
     public AppRunner(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
@@ -29,39 +30,21 @@ public class AppRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         List<Book> books = new ArrayList<>();
-        for(int i = 0; i < 10; i++) {
-            Book book = new Book("isbn-"+i, "some book");
-            //books.add(book);
+        for (int i = 0; i < 10; i++) {
+            Book book = new Book("isbn-" + i, "some book");
+            // books.add(book);
             bookRepository.save(book);
         }
-        //bookRepository.saveAll(books);
         
-        // logger.info("find ID 10 (try 1)");
-        // bookRepository.findById(10l);
-        // logger.info("find ID 10 (try 2)");
-        // bookRepository.findById(10l);
-        
-
         logger.info("find 1,2,3,4,5 (try 1)");
-        bookRepository.findAllById(Arrays.asList(1l,2l,3l,4l,5l));
+        findAllQuery(Arrays.asList(1l, 2l, 3l, 4l, 5l));
         logger.info("find 1,2,3,4,5 (try 2)");
-        bookRepository.findAllById(Arrays.asList(1l,2l,3l,4l,5l));
-        
-        logger.info("find 1,2,3,4,5,6,7 (try 1)");
-        bookRepository.findAllById(Arrays.asList(1l,2l,3l,4l,5l));
-        
-        // logger.info("saving book");
-        // bookRepository.save(book);
-        // logger.info("find by id 1");
-        // bookRepository.findById(1L);
-        // logger.info("find by id 1 (2nd try)");
-        // bookRepository.findById(1L);
-        
-        // logger.info("find by isbn 1234 (try 1)");
-        // bookRepository.findByIsbn("isbn-1234");
-        // logger.info("find by isbn 1234 (try 2)");
-        // bookRepository.findByIsbn("isbn-1234");
-      
+        findAllQuery(Arrays.asList(1l, 2l, 3l, 4l, 5l));
+    }
+
+    public List<Book> findAllQuery(List<Long> ids) {
+        Query q = entityManager.createQuery("SELECT b FROM Book b WHERE b.id in :ids").setParameter("ids", ids).setHint("org.hibernate.cacheable", true);
+        return q.getResultList();
     }
 
 }
