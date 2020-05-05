@@ -30,7 +30,7 @@ public class AppRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         setUpTestSaveSomeBooks();
 
-        //testFindById();
+        // testFindById();
 
         testFindAllById();
 
@@ -55,7 +55,7 @@ public class AppRunner implements CommandLineRunner {
     }
 
     private void testQueryCache() {
-         logger.info("find by isbn 1234 (try 1)");
+        logger.info("find by isbn 1234 (try 1)");
         bookRepository.findByIsbn("isbn-1234");
         logger.info("find by isbn 1234 (try 2)");
         bookRepository.findByIsbn("isbn-1234");
